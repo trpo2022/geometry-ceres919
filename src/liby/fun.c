@@ -1,10 +1,19 @@
-#include <ctype.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
-
-int checkfigure(char strf[])
-{
+#include "fun.h"
+#include <math.h>
+float S_circle(float r) {
+	float S_cir = M_PI * r * r;
+	return S_cir;
+}
+float P_circle(float r) {
+	float P_cir = 2 * M_PI * r;
+	return P_cir;
+}
+int checkfigure(char strf[]) {
+	float r;
     char figure[] = "circle";
     int i = 0, kr, flag1 = 0, flag2 = 0;
     if (strncmp(strf, figure, 6) == 0) {
@@ -100,22 +109,19 @@ int checkfigure(char strf[])
         }
         if (flag2 == 4) {
             char *parx, *pary, *parrad, *end;
-            printf("\nFigure: %s\n", figure);
+            printf("\nFigure: %s", figure);
             parx = &strf[7];
             parrad = &strf[kr];
-            printf("x=%.2f\n", strtod(parx, &pary));
-            printf("y=%.2f\n", strtod(pary, &end));
-            printf("radius=%.2f\n", strtod(parrad, &end));
+            printf("\nx=%.2f", strtod(parx, &pary));
+            printf("\ny=%.2f", strtod(pary, &end));
+            printf("\nradius=%.2f", r = strtod(parrad, &end));
         }
+        
+        
     }
+    if (flag2 == 4) {
+    	printf("\nS=%.2f",S_circle(r));
+    	printf("\nP=%.2f",P_circle(r));
+	}
     return 1;
-}
-
-int main()
-{
-    char strf[50];
-    printf("Enter figure and parameters: ");
-	fgets(strf, 50, stdin);
-    checkfigure(strf);
-    return 0;
 }
