@@ -1,19 +1,22 @@
-#include <stdio.h>
+#include "fun.h"
 #include <ctype.h>
+#include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "fun.h"
-#include <math.h>
-float S_circle(float r) {
-	float S_cir = M_PI * r * r;
-	return S_cir;
+float S_circle(float r)
+{
+    float S_cir = M_PI * r * r;
+    return S_cir;
 }
-float P_circle(float r) {
-	float P_cir = 2 * M_PI * r;
-	return P_cir;
+float P_circle(float r)
+{
+    float P_cir = 2 * M_PI * r;
+    return P_cir;
 }
-int checkfigure(char strf[]) {
-	float r;
+int checkfigure(char strf[])
+{
+    float r;
     char figure[] = "circle";
     int i = 0, kr, flag1 = 0, flag2 = 0;
     if (strncmp(strf, figure, 6) == 0) {
@@ -95,10 +98,13 @@ int checkfigure(char strf[]) {
                 continue;
         }
         if (flag2 == 3 && strf[i] == ')'
-            && (strf[i + 1] == '\0' || strf[i + 1] == '\n'  || strf[i + 1] == ' ')) {
+            && (strf[i + 1] == '\0' || strf[i + 1] == '\n'
+                || strf[i + 1] == ' ')) {
             flag2++;
         } else {
-            if (flag2 == 3 && strf[i] == ')'&& (strf[i + 1] != '\n' || strf[i + 1] != '\0' || strf[i + 1] != ' ')) {
+            if (flag2 == 3 && strf[i] == ')'
+                && (strf[i + 1] != '\n' || strf[i + 1] != '\0'
+                    || strf[i + 1] != ' ')) {
                 printf("\nError: unexpected token after ')'");
                 return 6;
             }
@@ -116,12 +122,10 @@ int checkfigure(char strf[]) {
             printf("\ny=%.2f", strtod(pary, &end));
             printf("\nradius=%.2f", r = strtod(parrad, &end));
         }
-        
-        
     }
     if (flag2 == 4) {
-    	printf("\nS=%.2f",S_circle(r));
-    	printf("\nP=%.2f",P_circle(r));
-	}
+        printf("\nS=%.2f", S_circle(r));
+        printf("\nP=%.2f", P_circle(r));
+    }
     return 1;
 }
