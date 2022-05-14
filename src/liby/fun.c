@@ -4,22 +4,40 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-float S_circle(float r)
+double S_circle(double r)
 {
-    float S_cir = M_PI * r * r;
-    return S_cir;
+    double S = M_PI * r * r;
+    return S;
 }
-float P_circle(float r)
+double P_circle(double r)
 {
-    float P_cir = 2 * M_PI * r;
-    return P_cir;
+    double P = 2 * M_PI * r;
+    return P;
 }
-int checkfigure(char strf[])
+
+void parsstr(
+        char strf[], int kr, int n, double xfig[], double yfig[], double rfig[])
 {
-    float r;
+    char *parx, *pary, *parrad, *end;
+    parx = &strf[7];
+    parrad = &strf[kr];
+    xfig[n] = strtod(parx, &pary);
+    yfig[n] = strtod(pary, &end);
+    rfig[n] = strtod(parrad, &end);
+}
+
+int checkfigure(
+        char strf[],
+        int n,
+        double xfig[],
+        double yfig[],
+        double rfig[],
+        double Sfig[],
+        double Pfig[])
+{
     char figure[] = "circle";
     int i = 0, kr, flag1 = 0, flag2 = 0;
-    if (strncmp(strf, figure, 6) == 0) {
+    if (strncasecmp(strf, figure, 6) == 0) {
         if (strf[6] == '(') {
             flag1 = 1;
         } else {
@@ -113,19 +131,51 @@ int checkfigure(char strf[])
                 return 7;
             }
         }
-        if (flag2 == 4) {
-            char *parx, *pary, *parrad, *end;
-            printf("\nFigure: %s", figure);
-            parx = &strf[7];
-            parrad = &strf[kr];
-            printf("\nx=%.2f", strtod(parx, &pary));
-            printf("\ny=%.2f", strtod(pary, &end));
-            printf("\nradius=%.2f", r = strtod(parrad, &end));
-        }
     }
     if (flag2 == 4) {
-        printf("\nS=%.2f", S_circle(r));
-        printf("\nP=%.2f", P_circle(r));
+        parsstr(strf, kr, n, xfig, yfig, rfig);
+        Sfig[n] = S_circle(rfig[n]);
+        Pfig[n] = P_circle(rfig[n]);
     }
     return 1;
+}
+void intersect(int j, int n, double xfig[], double yfig[], double rfig[])
+{
+    float d;
+    int g = 0;
+    char figure[] = "circle";
+    for (int k = 0; k <= n; k++) {
+        if (k == j)
+            continue;
+        d = fabs(sqrt(
+                pow((xfig[k] - xfig[j]), 2) + pow((yfig[k] - yfig[j]), 2)));
+        if (d <= (rfig[j] + rfig[k]))
+            g++;
+    }
+    if (g > 0) {
+        printf("\nintersect: ");
+        for (int i = 0; i < g; i++)
+            printf("\n%s", figure);
+    }
+}
+void print(
+        int j,
+        double xfig[],
+        double yfig[],
+        double rfig[],
+        double Sfig[],
+        double Pfig[])
+{
+    char figure[] = "circle";
+    printf("\n\nFigure: %s", figure);
+    printf("\nx=%.2f", xfig[j]);
+    printf("\ny=%.2f", yfig[j]);
+    printf("\nradius=%.2f", rfig[j]);
+    printf("\narea=%.2f", Sfig[j]);
+    printf("\nperimetr=%.2f", Pfig[j]);
+}
+void flush_input(){
+    int ch;
+  while ((ch = getchar()) != '\n' && ch != EOF);
+
 }
