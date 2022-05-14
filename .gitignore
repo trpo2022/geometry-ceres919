@@ -1,0 +1,6 @@
+*main
+*.a
+*.o
+*.d
+bin/geometry
+a.out
