@@ -23,7 +23,7 @@ int main()
             break;
         n++;
     }
-    for (int j = 0; j < n; j++) {
+    for (int j = 0; j <= n; j++) {
         print(j, xfig, yfig, rfig, Sfig, Pfig);
         if (n > 0)
             intersect(j, n, xfig, yfig, rfig);

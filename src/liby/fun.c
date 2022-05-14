@@ -32,15 +32,15 @@ int checkfigure(
         } else {
             if (strf[6] == ' ') {
                 printf("\nError: unexpected space");
-                return 1;
+                exit(0);
             } else {
                 printf("\nError: wrong name figure");
-                return 2;
+                exit(0);
             }
         }
     } else {
         printf("\nError: wrong name figure");
-        return 3;
+        exit(0);
     }
 
     if (flag1 == 1) {
@@ -48,7 +48,7 @@ int checkfigure(
         while (strf[i] != ')' && strf[i] != '\0') {
             if (strf[i - 1] == '(' && strf[i] == ' ') {
                 printf("\nError: unexpected space after '('");
-                return 9;
+                exit(0);
             }
             if (flag2 == 0
                 && (isdigit(strf[i]) != 0 || strf[i] == '-'
@@ -61,11 +61,11 @@ int checkfigure(
             }
             if (flag2 == 0 && strf[i] == ',') {
                 printf("\nError: unexpected token #1");
-                return 4;
+                exit(0);
             }
             if (flag2 == 1 && strf[i] == ',') {
                 printf("\nError: unexpected token #2");
-                return 4;
+                exit(0);
             }
             if (flag2 == 1
                 && (isdigit(strf[i]) != 0 || strf[i] == '-'
@@ -79,16 +79,16 @@ int checkfigure(
                 }
                 if (strf[i] == ',' && strf[i + 1] != ' ') {
                     printf("\nError: expected space after ','");
-                    return 4;
+                    exit(0);
                 }
                 if (strf[i] == ',' && strf[i + 2] == '-') {
                     printf("\nError: unexpected '-'");
-                    return 13;
+                    exit(0);
                 }
             }
             if (flag2 == 2 && strf[i] == ' ') {
                 printf("\nError: unexpected token #3, i=%d", i);
-                return 4;
+                exit(0);
             }
             if (flag2 == 2 && (isdigit(strf[i]) != 0 || strf[i] == '.')) {
                 i++;
@@ -99,7 +99,7 @@ int checkfigure(
             if (isdigit(strf[i]) == 0 && strf[i] != '-' && strf[i] != '.'
                 && strf[i] != ',' && strf[i] != ' ' && strf[i] != ')') {
                 printf("\nError: unexpected token %d", i);
-                return 5;
+                exit(0);
             }
             if (strf[i] == ')')
                 continue;
@@ -113,11 +113,11 @@ int checkfigure(
                 && (strf[i + 1] != '\n' || strf[i + 1] != '\0'
                     || strf[i + 1] != ' ')) {
                 printf("\nError: unexpected token after ')'");
-                return 6;
+                exit(0);
             }
             if (flag2 != 3 && strf[i] == ')') {
                 printf("\nError: wrong parametrs");
-                return 7;
+                exit(0);
             }
         }
     }
