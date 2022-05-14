@@ -174,8 +174,9 @@ void print(
     printf("\narea=%.2f", Sfig[j]);
     printf("\nperimetr=%.2f", Pfig[j]);
 }
-void flush_input(){
+void flush_input()
+{
     int ch;
-  while ((ch = getchar()) != '\n' && ch != EOF);
-
+    while ((ch = getchar()) != '\n' && ch != EOF)
+        ;
 }

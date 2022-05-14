@@ -22,7 +22,6 @@ int main()
         if (id == 0)
             break;
         n++;
-
     }
     for (int j = 0; j <= n; j++) {
         print(j, xfig, yfig, rfig, Sfig, Pfig);
