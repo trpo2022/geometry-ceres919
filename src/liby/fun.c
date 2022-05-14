@@ -15,17 +15,6 @@ double P_circle(double r)
     return P;
 }
 
-void parsstr(
-        char strf[], int kr, int n, double xfig[], double yfig[], double rfig[])
-{
-    char *parx, *pary, *parrad, *end;
-    parx = &strf[7];
-    parrad = &strf[kr];
-    xfig[n] = strtod(parx, &pary);
-    yfig[n] = strtod(pary, &end);
-    rfig[n] = strtod(parrad, &end);
-}
-
 int checkfigure(
         char strf[],
         int n,
@@ -133,7 +122,12 @@ int checkfigure(
         }
     }
     if (flag2 == 4) {
-        parsstr(strf, kr, n, xfig, yfig, rfig);
+        char *parx, *pary, *parrad, *end;
+        parx = &strf[7];
+        parrad = &strf[kr];
+        xfig[n] = strtod(parx, &pary);
+        yfig[n] = strtod(pary, &end);
+        rfig[n] = strtod(parrad, &end);
         Sfig[n] = S_circle(rfig[n]);
         Pfig[n] = P_circle(rfig[n]);
     }
